@@ -3,7 +3,7 @@
 
 #include "euc.h"
 
-#include <pthrea.h>
+#include <pthread.h>
 
 #include "blehandler.h"
 
@@ -23,7 +23,7 @@ class EucHandler {
   private:
     euc::BleHandler* ble_handler;
     Euc* connected_euc = nullptr;
-    
+
     pthread_t update_task;
     volatile bool is_running = false;
 
