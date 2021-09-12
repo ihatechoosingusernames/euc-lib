@@ -94,4 +94,10 @@ bool Gotway::isVeteran() {
   return is_veteran;
 }
 
+String Gotway::getBrand() {
+  if (isVeteran())
+    return "Veteran";
+  return "Gotway";
+}
+
 }

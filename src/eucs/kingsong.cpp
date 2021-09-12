@@ -97,4 +97,8 @@ void Kingsong::ProcessInput(uint8_t data[], size_t data_len) {
   return;
 }
 
+String Kingsong::getBrand() {
+  return "KingSong";
+}
+
 }

@@ -18,6 +18,7 @@ class Euc {
     double getBatteryPercent() { return battery_percent; };
     double getDistance() { return distance; };
     double getTotalDistance() { return total_distance; };
+    String getBrand() {return ""; };
 
   protected:
     double speed = 0, voltage = 0, current = 0, temperature = 0, temperature_2 = 0, battery_percent = 0, voltage_scaler = 0;
