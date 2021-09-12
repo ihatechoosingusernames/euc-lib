@@ -122,7 +122,7 @@ void* EucHandler::onUpdate(void* in) {
 
   euc_handler->ble_handler->Update();
 
-  if (!euc_handler->ble_handler->isConnected() && !euc_handler->ble_handler->isConnecting())
+  if (!euc_handler->ble_handler->isConnected() && !euc_handler->ble_handler->isScanning())
     euc_handler->ble_handler->Scan();
   
   vTaskDelay(100 / portTICK_PERIOD_MS); // Wait for 100 ms

@@ -20,6 +20,7 @@ class BleHandler {
     void Update();
     bool isConnected();
     bool isConnecting();
+    bool isScanning();
 
   private:
     static void* StartScan(void* in);

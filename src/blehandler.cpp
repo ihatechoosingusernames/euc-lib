@@ -48,6 +48,10 @@ bool BleHandler::isConnecting() {
   return should_connect;
 }
 
+bool BleHandler::isScanning() {
+  return scanning;
+}
+
 void* BleHandler::StartScan(void* in) {
   BLEScan* pBLEScan = NimBLEDevice::getScan();
   
@@ -175,15 +179,12 @@ BleHandler::AdvertisedDeviceCallbacks::AdvertisedDeviceCallbacks(BleHandler* sup
 void BleHandler::AdvertisedDeviceCallbacks::onResult(NimBLEAdvertisedDevice* device) {
   LOG_DEBUG_ARGS("BLE Advertised Device found: %s", device->toString().c_str());
 
-  std::string advertised_name = device->getName();
-  // Change name to upper case for matching
-  std::transform(advertised_name.begin(), advertised_name.end(), advertised_name.begin(), [](char c){return std::toupper(c); });
-
   for (size_t type = 0; type < static_cast<size_t>(EucType::kLastType); type++) {
     if (device->isAdvertisingService(BLEUUID(kServiceUuids[type]))) {
       super_reference->connect_device.push_back(device);
       super_reference->should_connect = true;
-      return; // Don't add the same device multiple times, as most EUCs have the same Service UUID
+      LOG_DEBUG("Added device to connect to");
+      return; // Don't add the same device multiple times, as most EUC brands have the same Service UUID
     }
   }
 }
