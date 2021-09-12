@@ -115,7 +115,6 @@ void EucHandler::onFoundWheel(euc::EucType type) {
 void* EucHandler::onUpdate(void* in) {
   while (true) {
     EucHandler* euc_handler = ((EucHandler*)in);
-    LOG_DEBUG("");
 
     if (!euc_handler->is_running) {
       vTaskDelete(NULL);  // Stop this thread from running when end() is called

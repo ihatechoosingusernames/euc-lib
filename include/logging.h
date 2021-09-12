@@ -1,7 +1,7 @@
 #ifndef LOGGING_H_
 #define LOGGING_H_
 
-#define DEBUG // Comment out to remove debug logs
+// #define DEBUG // Comment out to remove debug logs
 
 #ifndef DEBUG
 
