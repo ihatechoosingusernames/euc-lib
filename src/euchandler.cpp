@@ -112,12 +112,13 @@ void EucHandler::onFoundWheel(euc::EucType type) {
 
 // This is the periodic update to handle connection and reconnection to lost devices
 void* EucHandler::onUpdate(void* in) {
-  if (!is_running) {
+  EucHandler* euc_handler = ((EucHandler*)in);
+
+  if (!euc_handler->is_running) {
     vTaskDelete(NULL);  // Stop this thread from running when end() is called
     return NULL;
   }
 
-  EucHandler* euc_handler = ((EucHandler*)in);
   euc_handler->ble_handler->Update();
 
   if (!euc_handler->ble_handler->isConnected() && !euc_handler->ble_handler->isConnecting())
