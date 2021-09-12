@@ -1,7 +1,7 @@
 #ifndef EUC_H_
 #define EUC_H_
 
-#include "eucs/includes.h"
+#include <Arduino.h>
 
 namespace euc {
 

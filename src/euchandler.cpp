@@ -2,6 +2,7 @@
 
 #include <functional>
 
+#include "eucs/includes.h"
 #include "logging.h"
 
 EucHandler::EucHandler() {}
