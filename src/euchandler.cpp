@@ -12,7 +12,7 @@ EucHandler::~EucHandler() {
 }
 
 void EucHandler::begin() {
-  ble_handler = new BleHandler(std::bind(&EucHandler::onFoundWheel, this, std::placeholders::_1),
+  ble_handler = new euc::BleHandler(std::bind(&EucHandler::onFoundWheel, this, std::placeholders::_1),
     std::bind(&EucHandler::onProcessInput, this, std::placeholders::_1, std::placeholders::_2));
   
   pthread_create(&update_task, NULL, EucHandler::onUpdate, (void*)this);
@@ -21,6 +21,7 @@ void EucHandler::begin() {
 void EucHandler::end() {
   is_running = false;
   delete ble_handler;
+
   if (isConnected()) {
     delete connected_euc;
     connected_euc = nullptr;
@@ -31,10 +32,60 @@ bool EucHandler::isConnected() {
   return (connected_euc != nullptr) && ble_handler->isConnected();
 }
 
-Euc EucHandler::getEuc() {
+double EucHandler::getSpeed(){
   if (isConnected())
-    return *connected_euc;
-  return new Euc();
+    return connected_euc->getSpeed();
+  else
+    return 0;
+}
+
+double EucHandler::getVoltage(){
+  if (isConnected())
+    return connected_euc->getVoltage();
+  else
+    return 0;
+}
+
+double EucHandler::getCurrent(){
+  if (isConnected())
+    return connected_euc->getCurrent();
+  else
+    return 0;
+}
+
+double EucHandler::getTemperature(){
+  if (isConnected())
+    return connected_euc->getTemperature();
+  else
+    return 0;
+}
+
+double EucHandler::getBatteryPercent(){
+  if (isConnected())
+    return connected_euc->getBatteryPercent();
+  else
+    return 0;
+}
+
+double EucHandler::getDistance(){
+  if (isConnected())
+    return connected_euc->getDistance();
+  else
+    return 0;
+}
+
+double EucHandler::getTotalDistance(){
+  if (isConnected())
+    return connected_euc->getTotalDistance();
+  else
+    return 0;
+}
+
+String EucHandler::getBrand(){
+  if (isConnected())
+    return connected_euc->getBrand();
+  else
+    return "No Device Connected";
 }
 
 void EucHandler::onProcessInput(uint8_t* data, size_t data_size) {
@@ -45,7 +96,7 @@ void EucHandler::onProcessInput(uint8_t* data, size_t data_size) {
 
 // Creates the correct type of wheel object
 void EucHandler::onFoundWheel(euc::EucType type) {
-  LOG_DEBUG_ARGS("Found %s EUC", kBrandName[(size_t)type]);
+  LOG_DEBUG_ARGS("Found %s EUC", euc::kBrandName[(size_t)type]);
 
   switch (type) {
     case euc::EucType::kGotway:

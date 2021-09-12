@@ -8,8 +8,6 @@
 #include "blehandler.h"
 #include "constants.h"
 
-using euc::Euc;
-
 class EucHandler {
   public:
     EucHandler();
@@ -19,11 +17,19 @@ class EucHandler {
     void end();
 
     bool isConnected();
-    Euc getEuc();
+    
+    double getSpeed();
+    double getVoltage();
+    double getCurrent();
+    double getTemperature();
+    double getBatteryPercent();
+    double getDistance();
+    double getTotalDistance();
+    String getBrand();
   
   private:
     euc::BleHandler* ble_handler;
-    Euc* connected_euc = nullptr;
+    euc::Euc* connected_euc = nullptr;
 
     pthread_t update_task;
     volatile bool is_running = false;
@@ -31,7 +37,7 @@ class EucHandler {
     void onProcessInput(uint8_t* data, size_t data_size);
     void onFoundWheel(euc::EucType type);
 
-    void* onUpdate(void* in); // Thread task for updating
+    static void* onUpdate(void* in); // Thread task for updating
 };
 
 #endif // EUCHANDLER_H_

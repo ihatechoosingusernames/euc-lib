@@ -27,8 +27,4 @@ double Utils::FromArrayDescending(uint8_t array[], size_t num_elements) {
   return out;
 }
 
-String Utils::getUiScreenFileName(uint8_t screen) {
-  return (kUiScreenFilePrefix + String(screen) + "." + kUiScreenFileType).c_str();
-}
-
 }

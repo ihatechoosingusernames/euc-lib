@@ -7,7 +7,7 @@ namespace euc {
 class Gotway : public Euc {
   public:
     void ProcessInput(uint8_t data[], size_t data_len) override;
-    String getBrand() override;
+    String getBrand();
 
   private:
     bool isVeteran();

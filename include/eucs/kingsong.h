@@ -8,7 +8,7 @@ namespace euc {
 class Kingsong : public Euc {
   public:
     void ProcessInput(uint8_t data[], size_t data_len) override;
-    String getBrand() override;
+    String getBrand();
 
   private:
     String model;
