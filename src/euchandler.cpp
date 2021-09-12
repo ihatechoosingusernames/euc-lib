@@ -15,6 +15,7 @@ void EucHandler::begin() {
   ble_handler = new euc::BleHandler(std::bind(&EucHandler::onFoundWheel, this, std::placeholders::_1),
     std::bind(&EucHandler::onProcessInput, this, std::placeholders::_1, std::placeholders::_2));
   
+  is_running = true;
   pthread_create(&update_task, NULL, EucHandler::onUpdate, (void*)this);
 }
 
