@@ -29,7 +29,7 @@ class EucHandler {
     volatile bool is_running = false;
 
     void onProcessInput(uint8_t* data, size_t data_size);
-    void onFoundWheel(EucType type);
+    void onFoundWheel(euc::EucType type);
 
     void* onUpdate(void* in); // Thread task for updating
 };

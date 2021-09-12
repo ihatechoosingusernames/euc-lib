@@ -44,7 +44,7 @@ void EucHandler::onProcessInput(uint8_t* data, size_t data_size) {
 }
 
 // Creates the correct type of wheel object
-void EucHandler::onFoundWheel(EucType type) {
+void EucHandler::onFoundWheel(euc::EucType type) {
   LOG_DEBUG_ARGS("Found %s EUC", kBrandName[(size_t)type]);
 
   switch (type) {
